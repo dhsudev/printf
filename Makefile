@@ -10,18 +10,20 @@ LIBFT_PATH		= ./libft
 SRCS_PATH		= ./src
 INCLUDE_PATH	= ./include
 
+
 ##########  LIBFT
 LIBFT 			= $(LIBFT_PATH)/libft.a
 
 ##########  VARS FILES
-SRC_FILES		= tests.c	ft_printf.c
-
-OBJECTS			= $(SRC_FILES:.c=.o)
+SRC_FILES = numbers.c \
+			ft_printf.c \
+			tests.c
+OBJECTS = $(SRC_FILES:.c=.o)
 
 ##########  RULES
 all:  $(NAME) 
 
-$(NAME): $(LIBFT) objs/$(OBJECTS)  $(INCLUDE_PATH)/$(HEADER_FILE) Makefile
+$(NAME): $(LIBFT)  $(INCLUDE_PATH)/$(HEADER_FILE) Makefile objs/$(OBJECTS) 
 	@$(AR) $(NAME) objs/$(OBJECTS)
 	@echo "🔅 Printf is ready to work!"
 

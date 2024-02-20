@@ -6,14 +6,14 @@
 /*   By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:53 by ltrevin-          #+#    #+#             */
-/*   Updated: 2024/02/20 10:48:42 by ltrevin-         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:35:19 by ltrevin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../include/printf.h"
 int print_char(int c)
 {
-	return (write(1,&c,1))
+	return (write(1,&c,1));
 }
 int print_string(char *s)
 {
@@ -60,7 +60,7 @@ int print_format(char spec, va_list ap)
 	else if (spec == 'd')
 		count += print_digit((long)va_arg(ap, int), 10);
 	else if (spec == 'x')
-		count += print_digit((long)va_arg(ap, unsigned int), ,16);
+		count += print_digit((long)va_arg(ap, unsigned int), 16);
 	else
 		count += write(1,&spec,1);
 	return(count);
