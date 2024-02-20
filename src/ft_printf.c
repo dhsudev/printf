@@ -6,7 +6,7 @@
 /*   By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:53 by ltrevin-          #+#    #+#             */
-/*   Updated: 2024/02/20 16:21:46 by ltrevin-         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:25:25 by ltrevin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	print_format(char spec, va_list ap, int *count)
 		return (-1);
 	return (*count);
 }
+
 
 int	ft_printf(const char *format, ...)
 {
