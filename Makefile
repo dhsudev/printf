@@ -1,34 +1,53 @@
 ##########  VARS CONFIG
-NAME          = printf.a
-HEADER_FILE   = printf.h
-CC            = gcc
-FLAGS         = -Wall -Wextra -Werror
-AR            = ar rcs
+NAME			= printf.a
+HEADER_FILE		= printf.h
+CC				= gcc
+FLAGS			= -Wall -Wextra -Werror
+AR				= ar rcs
+
+##########  PATHS
+LIBFT_PATH		= ./libft
+SRCS_PATH		= ./src
+INCLUDE_PATH	= ./include
+
+##########  LIBFT
+LIBFT 			= $(LIBFT_PATH)/libft.a
+
 ##########  VARS FILES
-SRC_FILES     = tests.c
-OBJECTS       = $(SRC_FILES:.c=.o)
+SRC_FILES		= tests.c
+
+OBJECTS			= $(SRC_FILES:.c=.o)
+
 ##########  RULES
 all:  $(NAME) 
-$(NAME): $(OBJECTS)  $(HEADER_FILE) Makefile
-	@$(AR) $(NAME) $(OBJECTS)
-	@echo "📚 Library created!"
-	
+
+$(NAME): $(LIBFT) objs/$(OBJECTS)  $(INCLUDE_PATH)/$(HEADER_FILE) Makefile
+	@$(AR) $(NAME) objs/$(OBJECTS)
+	@echo "🔅 Printf is ready to work!"
+
+$(LIBFT):	
+	@make bonus -C $(LIBFT_PATH) > /dev/null
+	@echo "📚 Libft created!"
 #bonus: $(OBJECTS) $(OBJECTS_BNS) $(HEADER_FILE) Makefile
 #	@$(AR) $(NAME) $(OBJECTS) $(OBJECTS_BNS)
 #	@echo "🔅 Library with bonus created!"
 #	@touch bonus
 
-%.o: %.c 
-	@$(CC) $(FLAGS) -c $< -o $@
+objs/%.o: $(SRCS_PATH)/%.c
+#	@mkdir -p $(dir $@)
+	@$(CC) $(FLAGS) -c $< -o $@ -I  $(INCLUDE_PATH)
 	@echo "🛠  $(@:.o=) object created!"
 
-clean:
-	@rm -f $(OBJECTS)
-	@echo "🧼 Removed object files!"
+libftclean: 
+	@make fclean -C $(LIBFT_PATH)
+
+clean: libftclean
+	@rm -f objs/$(OBJECTS)
+	@echo "🔅🧼 Removed object files from printf!"
 	
 fclean: clean
 	@rm -f $(NAME)
-	@echo "🧼 Removed $(NAME) file!"
+	@echo "🔅🛁 Removed $(NAME) file!"
 	
 re: fclean all
 .PHONY: all clean fclean re

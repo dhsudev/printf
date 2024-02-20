@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 09:19:24 by ltrevin-          #+#    #+#             */
-/*   Updated: 2024/02/20 09:24:44 by ltrevin-         ###   ########.fr       */
+/*   Created: 2024/02/20 09:24:58 by ltrevin-          #+#    #+#             */
+/*   Updated: 2024/02/20 10:06:05 by ltrevin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-int main (void){
-	
-}
+#ifndef LIBFT_H
+# define LIBFT_H
+
+# include "../libft/libft.h"
+
+int		ft_printf(const char *format, ...);
+
+#endif
