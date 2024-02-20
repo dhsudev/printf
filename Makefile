@@ -6,7 +6,7 @@
 #    By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 16:20:31 by ltrevin-          #+#    #+#              #
-#    Updated: 2024/02/20 16:20:32 by ltrevin-         ###   ########.fr        #
+#    Updated: 2024/02/20 16:39:22 by ltrevin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,27 +28,25 @@ SRC_FILES = numbers.c \
 OBJECTS = $(SRC_FILES:.c=.o)
 
 ##########  RULES
-all:  $(NAME) 
+all: $(NAME)
 
-$(NAME):   $(INCLUDE_PATH)/$(HEADER_FILE) Makefile objs/$(OBJECTS) 
-	@$(AR) $(NAME) objs/$(OBJECTS)
+$(NAME): $(INCLUDE_PATH)/$(HEADER_FILE) $(addprefix objs/, $(OBJECTS))
+	@$(AR) $(NAME) $(addprefix objs/, $(OBJECTS))
 	@echo "🔅 Printf is ready to work!"
 
-
 objs/%.o: $(SRCS_PATH)/%.c
-#	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) -c $< -o $@ -I  $(INCLUDE_PATH)
-	@echo "🛠  $(@:.o=) object created!"
+	@mkdir -p objs
+	@$(CC) $(FLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+	@echo "🛠  $(@F) object created!"
 
+.PHONY: all clean fclean re
 
-
-clean: 
-	@rm -f objs/$(OBJECTS)
+clean:
+	@rm -rf objs
 	@echo "🧼 Removed object files from printf!"
-	
+
 fclean: clean
 	@rm -f $(NAME)
 	@echo "🛁 Removed $(NAME) file!"
-	
+
 re: fclean all
-.PHONY: all clean fclean re
