@@ -14,7 +14,7 @@ INCLUDE_PATH	= ./include
 LIBFT 			= $(LIBFT_PATH)/libft.a
 
 ##########  VARS FILES
-SRC_FILES		= tests.c
+SRC_FILES		= tests.c	ft_printf.c
 
 OBJECTS			= $(SRC_FILES:.c=.o)
 
@@ -43,11 +43,11 @@ libftclean:
 
 clean: libftclean
 	@rm -f objs/$(OBJECTS)
-	@echo "🔅🧼 Removed object files from printf!"
+	@echo "🧼 Removed object files from printf!"
 	
 fclean: clean
 	@rm -f $(NAME)
-	@echo "🔅🛁 Removed $(NAME) file!"
+	@echo "🛁 Removed $(NAME) file!"
 	
 re: fclean all
 .PHONY: all clean fclean re
