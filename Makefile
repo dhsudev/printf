@@ -6,12 +6,12 @@
 #    By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 16:20:31 by ltrevin-          #+#    #+#              #
-#    Updated: 2024/02/20 16:39:22 by ltrevin-         ###   ########.fr        #
+#    Updated: 2024/02/21 18:53:24 by ltrevin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##########  VARS CONFIG
-NAME			= printf.a
+NAME			= libftprintf.a
 HEADER_FILE		= printf.h
 CC				= gcc
 FLAGS			= -Wall -Wextra -Werror
@@ -22,15 +22,13 @@ SRCS_PATH		= ./src
 INCLUDE_PATH	= ./include
 
 ##########  VARS FILES
-SRC_FILES = numbers.c \
-			ft_printf.c \
-			tests.c
+SRC_FILES = ft_printf.c ft_pointers.c
 OBJECTS = $(SRC_FILES:.c=.o)
 
 ##########  RULES
 all: $(NAME)
 
-$(NAME): $(INCLUDE_PATH)/$(HEADER_FILE) $(addprefix objs/, $(OBJECTS))
+$(NAME): $(INCLUDE_PATH)/$(HEADER_FILE) $(addprefix objs/, $(OBJECTS)) Makefile
 	@$(AR) $(NAME) $(addprefix objs/, $(OBJECTS))
 	@echo "🔅 Printf is ready to work!"
 
