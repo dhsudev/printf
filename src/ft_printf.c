@@ -6,88 +6,63 @@
 /*   By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:53 by ltrevin-          #+#    #+#             */
-/*   Updated: 2024/02/22 00:52:19 by ltrevin-         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:16:27 by ltrevin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/printf.h"
+#include "../include/ft_printf.h"
 
-int	print_char(int c)
+int	print_char(int c, int *count)
 {
 	if (write(1, &c, 1) != -1)
-		count++;
+		*count += 1;
 	else
-		count = -1;
-	return (count);
+		*count = -1;
+	return (0);
 }
 
-int	print_string(char *s)
+int	print_string(char *s, int *count)
 {
-	int	count;
 	int	i;
 
 	i = 0;
-	count = 0;
 	if (!s)
-		return (print_string("(null)"));
+		return (print_string("(null)", count));
 	while (s[i])
 	{
-		count += print_char(s[i]);
+		print_char(s[i], count);
+		if (*count < 0)
+			return (-1);
 		i++;
 	}
-	return (count);
+	return (0);
 }
 
-int	print_digit(long n, long base, int upper)
+void	print_format(char spec, va_list ap, int *count)
 {
-	int		count;
-	char	*symb;
-
-	if (upper)
-		symb = "0123456789ABCDEF";
-	else
-		symb = "0123456789abcdef";
-	if (n < 0)
-	{
-		print_char('-');
-		return (print_digit(-n, base, upper) + 1);
-	}
-	else if (n < base)
-		return (print_char(symb[n]));
-	else
-	{
-		count = print_digit(n / base, base, upper);
-		return (count + print_digit(n % base, base, upper));
-	}
-}
-
-int	print_format(char spec, va_list ap, int *count)
-{
-	int temp;
-
-	temp = *count;
 	if (spec == 'c')
-		*count += print_char(va_arg(ap, int));
+		print_char(va_arg(ap, int), count);
 	else if (spec == 's')
-		*count += print_string(va_arg(ap, char *));
+		print_string(va_arg(ap, char *), count);
 	else if (spec == 'i' || spec == 'd')
-		*count += print_digit(va_arg(ap, int), 10, 0);
+		print_digit(va_arg(ap, int), 10, 0, count);
 	else if (spec == 'u')
-		*count += print_digit(va_arg(ap, unsigned int), 10, 0);
+		print_digit(va_arg(ap, unsigned int), 10, 0, count);
 	else if (spec == 'x')
-		*count += print_digit(va_arg(ap, unsigned int), 16, 0);
+		print_digit(va_arg(ap, unsigned int), 16, 0, count);
 	else if (spec == 'X')
-		*count += print_digit(va_arg(ap, unsigned int), 16, 1);
+		print_digit(va_arg(ap, unsigned int), 16, 1, count);
 	else if (spec == '%')
-		*count += print_char('%');
+		print_char('%', count);
 	else if (spec == 'p')
 	{
-		*count += print_string("0x");
-		*count += print_pt(va_arg(ap, unsigned long long));
+		print_string("0x", count);
+		if (*count < 0)
+			return ;
+		print_pt(va_arg(ap, unsigned long long), count);
 	}
 	else
-		return (-1);
-	return (temp);
+		*count = -1;
 }
 
 int	ft_printf(const char *format, ...)
@@ -103,17 +78,16 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (print_format(format[++i], ap, &count) > count)
+			print_format(format[++i], ap, &count);
+			if (count < 0)
 				return (-1);
 		}
 		else
 		{
-			if (count + print_char(format[i]) <= count)
+			print_char(format[i], &count);
+			if (count < 0)
 				return (-1);
-			count++;
 		}
-		if (count == -1)
-			return (-1);
 	}
 	return (count);
 }

@@ -6,19 +6,26 @@
 /*   By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:19:24 by ltrevin-          #+#    #+#             */
-/*   Updated: 2024/02/21 20:01:21 by ltrevin-         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:05:05 by ltrevin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "include/printf.h"
+#include "include/ft_printf.h"
 #include <limits.h>
+#include <unistd.h>
 
 int main (void){
 		int cnt;
-		cnt = printf("%s", (char *)NULL);
+		cnt = printf("%s\n", (char *)NULL);
 		printf("writed: %d\n", cnt);
-		cnt = ft_printf("%s", (char *)NULL);
-		printf("writed: %d", cnt);
-
+		cnt = ft_printf("%s\n", (char *)NULL);
+		printf("writed: %d\n", cnt);
+		cnt = printf("%s\n", (char *)NULL);
+		printf("writed: %d\n", cnt);
+		printf("HOLA\n\n");
+		cnt = ft_printf("%s\n", (char *)NULL);
+		printf("writed: %d\n", cnt);
+		
+		
 }

@@ -6,13 +6,13 @@
 #    By: ltrevin- <ltrevin-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 16:20:31 by ltrevin-          #+#    #+#              #
-#    Updated: 2024/02/21 18:53:24 by ltrevin-         ###   ########.fr        #
+#    Updated: 2024/02/23 17:53:33 by ltrevin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##########  VARS CONFIG
 NAME			= libftprintf.a
-HEADER_FILE		= printf.h
+HEADER_FILE		= ft_printf.h
 CC				= gcc
 FLAGS			= -Wall -Wextra -Werror
 AR				= ar rcs
@@ -22,7 +22,7 @@ SRCS_PATH		= ./src
 INCLUDE_PATH	= ./include
 
 ##########  VARS FILES
-SRC_FILES = ft_printf.c ft_pointers.c
+SRC_FILES = ft_printf.c ft_numbers.c
 OBJECTS = $(SRC_FILES:.c=.o)
 
 ##########  RULES
